@@ -182,7 +182,7 @@ router.post('/postagens/nova', (req, res) =>{
         if(req.body.slug.length < 3){
             erros.push({texto: 'O Slug é muito curto'})
         }
-        if(req.body.slug.length > 15){
+        if(req.body.slug.length > 45){
             erros.push({texto: 'O Slug é muito longo'})
         }
 
@@ -249,6 +249,16 @@ router.post('/postagem/edit', (req, res) =>{
         res.redirect("/admin/postagens/")
     })
  
+})
+// Deletar objetos[NÃO TÃO SEGURO!!!!]
+router.get('/postagens/deletar/:id', (req, res) =>{
+    Postagem.remove({_id: req.params.id}).then(()=>{
+        req.flash('success_msg', 'Postagem deletada com sucesso!')
+        res.redirect('/admin/postagens')
+    }).catch((err)=>{
+        req.flash('error_msg', 'H ouve um erro interno')
+        res.redirect('/admin/postagens')
+    })
 })
 
 
