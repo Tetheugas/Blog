@@ -13,6 +13,7 @@
     const Postagem = mongoose.model('postagens')
     require('./models/Categoria')
     const Categoria = mongoose.model('categorias')
+    const usuarios = require('./routes/usuario')
     // Validação de postagens
     const validator = require('validator')
 // Configurações
@@ -111,8 +112,9 @@
       res.send('Erro 404!')  
     })
     app.use('/admin', admin)
+    app.use('/usuarios', usuarios)
 // Outros
-const PORT = 8081
-app.listen(PORT, () => {
+    const PORT = 8081
+    app.listen(PORT, () => {
     console.log('Servidor rodando')
-})
+    })
