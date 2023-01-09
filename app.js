@@ -16,6 +16,7 @@
     const usuarios = require('./routes/usuario')
     
     const passport = require('passport')
+    const db = require('./config/db')
     // Validação de postagens
     const validator = require('validator')
 // Configurações
@@ -49,7 +50,7 @@
         app.set('view engine', 'handlebars')
     // Mongoose
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://127.0.0.1:27017/blogapp').then(() => {
+        mongoose.connect(db.mongoURI).then(() => {
            console.log('Conectado ao banco de dados') 
         }).catch((erro)=>{
             console.log('Não foi possivel se conectar ' + erro)
@@ -57,14 +58,14 @@
     // Public
         app.use(express.static(path.join(__dirname,'public')))
 // Rotas
-    app.get('/', (req, res)=>[
+    app.get('/', (req, res)=>{
         Postagem.find().lean().populate('categoria').sort({data: 'desc'}).then((postagens)=>{
             res.render('index', {postagens: postagens})
         }).catch((err)=>{
             req.flash('error_msg', 'Houve um erro interno')
             res.redirect('/404')
         })  
-    ])
+    })
     app.get('/postagem/:slug', (req, res)=>{
         const slug = req.params.slug
 
@@ -124,7 +125,7 @@
     app.use('/admin', admin)
     app.use('/usuarios', usuarios)
 // Outros
-    const PORT = 8081
+    const PORT = process.env.port || 8081
     app.listen(PORT, () => {
     console.log('Servidor rodando')
     })

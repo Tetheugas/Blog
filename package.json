@@ -10,5 +10,24 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.7.0"
-  }
+  },
+  "name": "blog",
+  "description": "Blog feito com os ensinamentos do \r Curso de Node.js\r Victor Lima - Guia do Programador",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tetheugas/Blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tetheugas/Blog/issues"
+  },
+  "homepage": "https://github.com/Tetheugas/Blog#readme"
 }
